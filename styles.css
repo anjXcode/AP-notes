@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.header {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.note {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 15px;
+    transition: background 0.3s ease;
+}
+
+.note:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.light-theme {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.dark-theme {
+    background-color: #222;
+    color: #f0f0f0;
+}
+
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .note {
+        padding: 10px;
+    }
+}
+
+@keyframes fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.note {
+    animation: fade 0.5s ease; // Add fade effect
+}
+
+.color-coded {
+    border-left: 5px solid red; /* Example for color coding */
+}
