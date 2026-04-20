@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP Notes - Your Extraordinary Notes App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-title">📝 AP Notes</h1>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                    🌙
+                </button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search notes...">
+            </div>
+
+            <div class="categories-section">
+                <h3>Categories</h3>
+                <div class="category-list">
+                    <button class="category-btn active" data-category="all">All Notes</button>
+                    <button class="category-btn" data-category="work">Work</button>
+                    <button class="category-btn" data-category="personal">Personal</button>
+                    <button class="category-btn" data-category="ideas">Ideas</button>
+                    <button class="category-btn" data-category="todo">To-Do</button>
+                </div>
+                <input type="text" id="newCategoryInput" placeholder="Add new category">
+                <button id="addCategoryBtn" class="add-btn">+ Add Category</button>
+            </div>
+
+            <button id="newNoteBtn" class="new-note-btn">+ New Note</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="editor-section">
+                <div class="editor-header">
+                    <input type="text" id="noteTitle" placeholder="Enter note title..." class="note-title">
+                    <div class="editor-actions">
+                        <select id="categorySelect" class="category-select">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="ideas">Ideas</option>
+                            <option value="todo">To-Do</option>
+                        </select>
+                        <select id="colorPicker" class="color-picker">
+                            <option value="#ffffff" style="background-color: #ffffff;">White</option>
+                            <option value="#ffe6e6" style="background-color: #ffe6e6;">Red</option>
+                            <option value="#fff3e6" style="background-color: #fff3e6;">Orange</option>
+                            <option value="#fffde6" style="background-color: #fffde6;">Yellow</option>
+                            <option value="#e6ffe6" style="background-color: #e6ffe6;">Green</option>
+                            <option value="#e6f3ff" style="background-color: #e6f3ff;">Blue</option>
+                            <option value="#f0e6ff" style="background-color: #f0e6ff;">Purple</option>
+                            <option value="#ffe6f0" style="background-color: #ffe6f0;">Pink</option>
+                        </select>
+                        <button id="pinBtn" class="pin-btn" title="Pin this note">📌</button>
+                        <button id="saveNoteBtn" class="save-btn">Save</button>
+                        <button id="deleteNoteBtn" class="delete-btn">Delete</button>
+                    </div>
+                </div>
+
+                <!-- Rich Text Toolbar -->
+                <div class="toolbar">
+                    <button id="boldBtn" class="toolbar-btn" title="Bold (Ctrl+B)"><b>B</b></button>
+                    <button id="italicBtn" class="toolbar-btn" title="Italic (Ctrl+I)"><i>I</i></button>
+                    <button id="underlineBtn" class="toolbar-btn" title="Underline (Ctrl+U)"><u>U</u></button>
+                    <div class="toolbar-separator"></div>
+                    <button id="h1Btn" class="toolbar-btn" title="Heading 1">H1</button>
+                    <button id="h2Btn" class="toolbar-btn" title="Heading 2">H2</button>
+                    <button id="h3Btn" class="toolbar-btn" title="Heading 3">H3</button>
+                    <div class="toolbar-separator"></div>
+                    <button id="ulBtn" class="toolbar-btn" title="Unordered List">UL</button>
+                    <button id="olBtn" class="toolbar-btn" title="Ordered List">OL</button>
+                    <button id="quoteBtn" class="toolbar-btn" title="Blockquote">"</button>
+                    <div class="toolbar-separator"></div>
+                    <button id="clearBtn" class="toolbar-btn" title="Clear Formatting">Clear</button>
+                    <button id="exportBtn" class="toolbar-btn" title="Export Note">📥</button>
+                </div>
+
+                <textarea id="noteContent" placeholder="Start typing your note... (Auto-saves every 30 seconds)" class="note-editor"></textarea>
+
+                <div class="editor-footer">
+                    <span id="charCount">0 characters</span>
+                    <span id="autoSaveStatus" class="auto-save-status">✓ Auto-saved</span>
+                </div>
+            </div>
+
+            <!-- Notes List -->
+            <div class="notes-list">
+                <h2>Your Notes</h2>
+                <div id="notesList" class="notes-container">
+                    <p class="no-notes">No notes yet. Create one to get started!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Export Note</h2>
+            <button id="exportPdfBtn" class="export-option">📄 Export as PDF</button>
+            <button id="exportTxtBtn" class="export-option">📝 Export as TXT</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
