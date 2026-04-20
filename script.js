@@ -1,83 +1,95 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize app
-    loadNotes();
-    setupEventListeners();
-    setInterval(autoSaveNotes, 30000); // Auto-save every 30 seconds
-});
+// Notes App JavaScript Code
 
-// Note Management
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
+// Variables
+let notes = []; // Array to hold notes
+let currentTheme = 'light'; // Current theme
 
-function createNote() {
-    // Logic to create a new note
+// Function to create a new note
+function createNote(title, content) {
+    const note = { id: Date.now(), title: title, content: content, pinned: false };
+    notes.push(note);
+    renderNotes();
 }
 
-function editNote(noteId) {
-    // Logic to edit a note by noteId
-}
-
-function deleteNote(noteId) {
-    // Logic to delete a note
-}
-
-function pinNote(noteId) {
-    // Logic to pin/unpin a note
-}
-
-// Theme Management
-function toggleDarkLightMode() {
-    document.body.classList.toggle('dark-mode');
-}
-
-// Search and Filtering
-function searchNotes(query) {
-    // Logic to filter notes based on query
-}
-
-// Categories Management
-function manageCategories() {
-    // Logic to manage categories
-}
-
-// Rich Text Editor
-function setupRichTextEditor() {
-    // Formatting functions for rich text
-}
-
-// Auto Save Functionality
-function autoSaveNotes() {
-    localStorage.setItem('notes', JSON.stringify(notes));
-}
-
-// Character Count
-function updateCharacterCount() {
-    // Update character count for current note
-}
-
-// Export Functionality
-function exportNotes(format) {
-    // Logic to export notes as PDF or TXT
-}
-
-// LocalStorage Persistence
-function loadNotes() {
-    notes.forEach(note => {
-        // Render notes on the UI
-    });
-}
-
-// Keyboard Shortcuts
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 's') {
-        e.preventDefault();
-        autoSaveNotes();
-        // Notify user of save
+// Function to edit an existing note
+function editNote(id, newTitle, newContent) {
+    const note = notes.find(n => n.id === id);
+    if (note) {
+        note.title = newTitle;
+        note.content = newContent;
+        renderNotes();
     }
-});
-
-// Event Listeners
-function setupEventListeners() {
-    document.getElementById('createNoteButton').addEventListener('click', createNote);
-    document.getElementById('toggleThemeButton').addEventListener('click', toggleDarkLightMode);
-    // More event listeners...
 }
+
+// Function to delete a note
+function deleteNote(id) {
+    notes = notes.filter(note => note.id !== id);
+    renderNotes();
+}
+
+// Function to toggle dark/light theme
+function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.body.className = currentTheme;
+}
+
+// Function to search notes
+function searchNotes(query) {
+    const filteredNotes = notes.filter(n => n.title.includes(query) || n.content.includes(query));
+    renderNotes(filteredNotes);
+}
+
+// Function to manage categories
+function addCategory(noteId, category) {
+    const note = notes.find(n => n.id === noteId);
+    if (note) {
+        note.category = category;
+        renderNotes();
+    }
+}
+
+// Function for rich text editor
+function formatText(formatType) {
+    document.execCommand(formatType);
+}
+
+// Auto-save notes every 30 seconds
+setInterval(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+}, 30000);
+
+// Function to export notes
+function exportNotes(format) {
+    // Export function implementation here
+}
+
+// Function for pinning/unpinning notes
+function togglePin(noteId) {
+    const note = notes.find(n => n.id === noteId);
+    if (note) {
+        note.pinned = !note.pinned;
+        renderNotes();
+    }
+}
+
+// Function to display character count
+function displayCharacterCount(content) {
+    const count = content.length;
+    document.getElementById('charCount').innerText = `Character Count: ${count}`;
+}
+
+// Function to render notes
+function renderNotes(filteredNotes = notes) {
+    // Rendering logic here
+}
+
+// Add Event Listeners for buttons
+document.getElementById('createNoteBtn').addEventListener('click', () => {
+    const title = document.getElementById('noteTitle').value;
+    const content = document.getElementById('noteContent').value;
+    createNote(title, content);
+});
+document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+
+// More event listeners can be added here...
+
